@@ -396,7 +396,7 @@ def async_register_services(hass: HomeAssistant, domain: str):
             if isinstance(entity, BaseSensorEntity)
             and entity.coordinator == entry_data.state_coordinator
         ]
-        selected_entities = await async_extract_entities(hass, entities, call)
+        selected_entities = await async_extract_entities(entities, call)
         sensor_keys = [entity.key for entity in selected_entities]
         sensors, errors = await entry_data.manager.async_poll_sensors(
             sensor_keys,
@@ -422,7 +422,7 @@ def async_register_services(hass: HomeAssistant, domain: str):
             if isinstance(entity, BaseSensorEntity)
             and entity.coordinator == entry_data.state_coordinator
         ]
-        selected_entities = await async_extract_entities(hass, entities, call)
+        selected_entities = await async_extract_entities(entities, call)
         if len(selected_entities) > len(values):
             raise ServiceValidationError("Not all values provided")
         sensor_keys = [entity.key for entity in selected_entities]
